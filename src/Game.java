@@ -24,7 +24,7 @@ public class Game {
 		GameKeyListener listener = new GameKeyListener();
 		mainFrame.addKeyListener(listener);
 		
-		timer = new Timer(60, new ActionListener() {
+		timer = new Timer(10, new ActionListener() {
 		       public void actionPerformed(ActionEvent e) // will run when the timer fires
 		 	   {
 		    	   tick();
@@ -76,7 +76,6 @@ public class Game {
 			}else if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 				getPlayer().setDy(-1);
 			}else if(e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-				System.out.println("up");
 				getPlayer().setDy(1);
 			}
 			
