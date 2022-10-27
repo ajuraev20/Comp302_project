@@ -20,7 +20,8 @@ public class MainGamePanel extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
 		
 		for (GameObject obj : game.getGameObjects()) {
-			 g2.fillRect(obj.getPosition().x, obj.getPosition().y, 20, 20);
+			g2.setColor(obj.color);
+			g2.fillRect(obj.getRect().x, obj.getRect().y, obj.rect.width, obj.rect.height);
 		}
 		
 	}
