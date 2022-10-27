@@ -1,3 +1,4 @@
+package GameLogic;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Timer;
+
+import GUI.GameFrame;
+import GameObjects.GameObject;
+import GameObjects.Player;
+import GameObjects.Wall;
 
 
 
@@ -24,8 +30,8 @@ public class Game {
 	public Game() {
 		buildGame();
 
-		
 		mainFrame = new GameFrame(this);
+
 		GameKeyListener listener = new GameKeyListener();
 		mainFrame.addKeyListener(listener);
 		mainFrame.getComponent(0).addMouseListener(new GameMouseListener());;

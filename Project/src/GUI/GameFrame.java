@@ -1,4 +1,7 @@
+package GUI;
 import javax.swing.JFrame;
+
+import GameLogic.Game;
 
 public class GameFrame extends JFrame{
 

@@ -1,8 +1,12 @@
+package GUI;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+import GameLogic.Game;
+import GameObjects.GameObject;
 
 public class MainGamePanel extends JPanel{
 	
@@ -21,7 +25,7 @@ public class MainGamePanel extends JPanel{
 		
 		for (GameObject obj : game.getGameObjects()) {
 			g2.setColor(obj.color);
-			g2.fillRect(obj.getRect().x, obj.getRect().y, obj.rect.width, obj.rect.height);
+			g2.fillRect(obj.getRect().x, obj.getRect().y, obj.getRect().width, obj.getRect().height);
 		}
 		
 	}
