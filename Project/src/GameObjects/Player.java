@@ -1,15 +1,17 @@
 package GameObjects;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.List;
 
 import GUI.MainGamePanel;
+import GameLogic.Game;
 
 
 
 public class Player extends GameObject {
 	
-	private int ms = 5;
+	private int ms = 4;
 	private int dx;
 	private int dy;
 
@@ -22,7 +24,7 @@ public class Player extends GameObject {
 		this.dx = 0;
 		this.dy = 0;
 
-		this.color = Color.BLACK;
+		this.color = Color.RED;
 		// TODO Auto-generated constructor stub
 		
 	}
@@ -42,17 +44,27 @@ public class Player extends GameObject {
 	private void checkCollision(List<GameObject> gameObjects) {
 		// TODO Auto-generated method stub
 		for(GameObject obj : gameObjects) {
-			if(obj != this && this.rect.intersects(obj.getRect())) {
-				if(rect.x+rect.width > obj.getRect().x && dx > 0) {
+			int rayWidth = 1;
+			
+			Rectangle botRay = new Rectangle(rect.x + rect.width/2,rect.y + rect.height,1,rayWidth);
+			Rectangle topRay = new Rectangle(rect.x + rect.width/2,rect.y - rayWidth,1,rayWidth);
+			Rectangle leftRay = new Rectangle(rect.x - rayWidth,rect.y + rect.height/2,rayWidth,1);
+			Rectangle rightRay = new Rectangle(rect.x + rect.width,rect.y + rect.height/2,rayWidth,1);
+
+			//System.out.println(topRay);
+			if(obj != this) {
+				if(rightRay.intersects(obj.getRect())) {
 					rect.x = obj.getRect().x-rect.width;
-				}else if(rect.x < obj.getRect().x + obj.getRect().width && dx < 0) {
+					System.out.println("1");
+				}else if(leftRay.intersects(obj.getRect())) {
 					rect.x = obj.getRect().x + obj.getRect().width;
-				}
-				
-				else if(rect.y+rect.height > obj.getRect().y && dy > 0) {
+					System.out.println("2");
+				}else if(botRay.intersects(obj.getRect())) {
 					rect.y = obj.getRect().y - rect.height;
-				}else if(rect.y < obj.getRect().y + obj.getRect().height && dy < 0) {
+					System.out.println("down");
+				}else if(topRay.intersects(obj.getRect())) {
 					rect.y = obj.getRect().y + obj.getRect().height;
+					System.out.println("4");
 				}
 			}
 		}
@@ -83,7 +95,7 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void onClick(Point p) {
+	public void onClick(Point p, Game game) {
 		// TODO Auto-generated method stub
 		
 	}

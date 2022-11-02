@@ -17,24 +17,24 @@ import GameObjects.GameObject;
 import GameObjects.Player;
 import GameObjects.Wall;
 
-
-
-
 public class Game {
 	
 	private static Timer timer;
-	private List<GameObject> gameObjects;
+	//private List<GameObject> gameObjects;
 	private GameFrame mainFrame;
 	private GameObject selectedGameObject;
+	private SceneManager sceneManager;
 
 	public Game() {
 		buildGame();
+		
+		sceneManager = new SceneManager();
 
 		mainFrame = new GameFrame(this);
 
 		GameKeyListener listener = new GameKeyListener();
 		mainFrame.addKeyListener(listener);
-		mainFrame.getComponent(0).addMouseListener(new GameMouseListener());;
+		mainFrame.getComponent(0).addMouseListener(new GameMouseListener());
 		
 		
 		startTimer();
@@ -43,19 +43,12 @@ public class Game {
 	}
 	
 	private void buildGame() {
-		Player player = new Player("player", 100, 100);
 		
-		gameObjects = new ArrayList<GameObject>();
-		gameObjects.add(player);
-		
-		Wall wall1 = new Wall("wall",200,200);
-		
-		gameObjects.add(wall1);
 	}
 	
 	private void tick() {
-		mainFrame.update();
-		getPlayer().move(gameObjects);
+		mainFrame.render();
+		getPlayer().move(getGameObjects());
 		moveSelectedObject();
 		
 		
@@ -63,7 +56,7 @@ public class Game {
 	
 	private void moveSelectedObject() {
 		if(selectedGameObject != null) {	
-			selectedGameObject.onClick(getMouseLoc());;
+			selectedGameObject.onClick(getMouseLoc(), this);;
 		}
 	}
 	
@@ -85,21 +78,44 @@ public class Game {
 		timer.start();
 	}
 	
+	public Scene getCurrScene() {
+		return sceneManager.getCurrScene();
+	}
+	
+	public SceneManager getSceneManager() {
+		return sceneManager;
+	}
+	
 	public List<GameObject> getGameObjects() {
-		return this.gameObjects;
+		return getCurrScene().gameObjects;
+	}
+	
+	public void buildNewObject(GameObject obj) {
+		GameObject newObj = obj;
+		newObj.setBuildingMode(false);
+		
+		selectedGameObject = newObj;
+		getGameObjects().add(newObj);
+		
 	}
 	
 	public Player getPlayer() {
-		for(GameObject obj:gameObjects) {
+		for(GameObject obj:getCurrScene().gameObjects) {
 			if(obj.name.equals("player")) return (Player) obj;
 		}
 		return null;
 	}
 	
 	private GameObject getClickedObject(Point p) {
-		for(GameObject obj : gameObjects) {
+		for(GameObject obj : getCurrScene().gameObjects) {
 			if(obj.getRect().contains(p)) {
-				System.out.println(obj.name);
+				//System.out.println(obj.name);
+				return obj;
+			}
+		}
+		for(UIObject obj : getCurrScene().UIObjects) {
+			if(obj.getRect().contains(p)) {
+				//System.out.println(obj.name);
 				return obj;
 			}
 		}

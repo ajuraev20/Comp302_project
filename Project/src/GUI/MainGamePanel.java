@@ -10,7 +10,7 @@ import GameObjects.GameObject;
 
 public class MainGamePanel extends JPanel{
 	
-	public static final int WIDTH = 512, HEIGHT = 512;
+	public static final int WIDTH = 800, HEIGHT = 550;
 	public Game game;
 	
 	public MainGamePanel(Game game) {
@@ -22,11 +22,13 @@ public class MainGamePanel extends JPanel{
 	public void paintComponent( Graphics g) {
 		super.paintComponent( g );
         Graphics2D g2 = (Graphics2D) g;
+        
+        game.getCurrScene().renderScene(g2);
 		
-		for (GameObject obj : game.getGameObjects()) {
-			g2.setColor(obj.color);
-			g2.fillRect(obj.getRect().x, obj.getRect().y, obj.getRect().width, obj.getRect().height);
-		}
+//		for (GameObject obj : game.getGameObjects()) {
+//			g2.setColor(obj.color);
+//			g2.fillRect(obj.getRect().x, obj.getRect().y, obj.getRect().width, obj.getRect().height);
+//		}
 		
 	}
 

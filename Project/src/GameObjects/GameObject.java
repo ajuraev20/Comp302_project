@@ -2,12 +2,17 @@ package GameObjects;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.List;
+
+import GameLogic.Game;
 
 public abstract class GameObject {
 	
 	public String name;
 	protected Rectangle rect;
 	protected boolean pressed;
+	protected boolean buildingMode;
+
 
 	public Color color;
 
@@ -29,6 +34,10 @@ public abstract class GameObject {
 		pressed = false;
 	}
 	
-	public abstract void onClick(Point p);
+	public void setBuildingMode(boolean buildingMode) {
+		this.buildingMode = buildingMode;
+	}
+	
+	public abstract void onClick(Point p, Game game);
 
 }

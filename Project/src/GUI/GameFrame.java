@@ -2,6 +2,7 @@ package GUI;
 import javax.swing.JFrame;
 
 import GameLogic.Game;
+import GameLogic.Scene;
 
 public class GameFrame extends JFrame{
 
@@ -25,7 +26,7 @@ public class GameFrame extends JFrame{
 
 	}
 	
-	public void update() {
+	public void render() {
 		
 		mainGamePanel.repaint();
 	}
