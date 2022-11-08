@@ -166,7 +166,7 @@ public class BuildingModeScene extends Scene{
 	
 	public void saveLevel() {
 		
-		if(levelNum < 2) {
+		if(levelNum < 6) {
 			//System.out.println(getStaticObjCnt());
 			//levelMinObjMap.get(levelNum)
 			if(getStaticObjCnt() >= levelMinObjMap.get(levelNum)) {
